@@ -1,0 +1,394 @@
+/* =========================
+   CSS Custom Properties
+========================= */
+:root {
+
+    /* Fonts */
+    --font-heading: 'Urbanist', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Colors */
+    --color-primary: #2B3990;
+    --color-heading: #111827;
+    --color-body-dark: #262A2E;
+    --color-body-medium: #4B5563;
+    --color-body-light: #6A7077;
+    --color-border-gray: #F3F4F6;
+    --color-tag-yellow: #FEF3C7;
+    --color-tag-text-yellow: #92400E;
+    --color-border-gray-light: #E1E3E8;
+    --color-white: #FFFFFF;
+
+    /* Font Sizes */
+    --font-size-hero-h1: 56px;
+    --font-size-body-large: 16px;
+    --font-size-body-medium: 14px;
+    --font-size-price: 20px;
+    --font-size-nav: 14px;
+
+    /* Line Heights */
+    --line-height-hero: 120%;
+    --line-height-body-large: 24px;
+
+    /* Layout */
+    --container-max-width: 1240px;
+    --section-padding: 100px 0;
+}
+
+
+/* =========================
+   Reset
+========================= */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+
+/* =========================
+   Base Styles
+========================= */
+body {
+    font-family: var(--font-body);
+    line-height: 1.5;
+    color: var(--color-body-dark);
+    background-color: var(--color-white);
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+
+/* =========================
+   Typography
+========================= */
+h1 {
+    font-family: var(--font-heading);
+    font-size: var(--font-size-hero-h1);
+    font-weight: 700;
+    line-height: var(--line-height-hero);
+    color: var(--color-heading);
+}
+
+h2 {
+    font-family: var(--font-heading);
+    font-size: 40px;
+}
+
+h3 {
+    font-family: var(--font-heading);
+    font-size: 28px;
+}
+
+p {
+    font-size: var(--font-size-body-large);
+    line-height: var(--line-height-body-large);
+    color: var(--color-body-medium);
+}
+
+
+/* =========================
+   Layout
+========================= */
+.container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section {
+    padding: var(--section-padding);
+}
+
+
+/* =========================
+   Buttons
+========================= */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: var(--font-size-body-large);
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+}
+
+.btn-primary:hover {
+    background-color: #1e2a6b;
+    border-color: #1e2a6b;
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.btn-outline:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+
+/* =========================
+   Tag / Badge
+========================= */
+.tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: var(--font-size-body-medium);
+    font-weight: 500;
+}
+
+.tag-yellow {
+    background-color: var(--color-tag-yellow);
+    color: var(--color-tag-text-yellow);
+}
+
+/* Styles for width 1600 and above */
+/* =========================
+   Header
+========================= */
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: var(--color-white);
+    border-bottom: 1px solid var(--color-border-gray-light);
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-links a {
+    padding: 12px 16px;
+    display: block;
+    font-size: var(--font-size-nav);
+}
+
+/* Products Dropdown */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    background: white;
+    border: 1px solid var(--color-border-gray);
+    border-radius: 6px;
+
+    display: none;
+    flex-direction: column;
+
+    min-width: 180px;
+}
+
+.dropdown-menu li {
+    padding: 8px 16px;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: flex;
+}
+
+/* =========================
+   Hero Section
+========================= */
+.hero-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:60px;
+margin-top:30px;
+}
+.product-gallery{
+display:flex;
+flex-direction:column;
+gap:16px;
+}
+.product-gallery{
+display:flex;
+flex-direction:column;
+gap:16px;
+}
+.gallery-arrow{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+background:white;
+border:none;
+border-radius:50%;
+width:40px;
+height:40px;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+}
+.gallery-arrow{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+background:white;
+border:none;
+border-radius:50%;
+width:40px;
+height:40px;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+}
+
+/* Thumbnails */
+.thumbs{
+display:flex;
+gap:12px;
+}
+.thumb{
+width:80px;
+height:80px;
+background:#e5e5e5;
+border-radius:10px;
+}
+/* certifications */
+.certifications{
+display:flex;
+gap:12px;
+margin-bottom:16px;
+}
+.cert{
+display:flex;
+align-items:center;
+gap:6px;
+padding:6px 10px;
+border-radius:6px;
+background:#f5f5f5;
+font-size:12px;
+}
+/* features list */
+.features{
+list-style:none;
+margin:20px 0;
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+.features li{
+display:flex;
+align-items:center;
+gap:8px;
+font-size:var(--font-size-body-large);
+}
+/* price card */
+.price-card{
+background:#f7f7f7;
+padding:20px;
+border-radius:12px;
+margin-top:20px;
+}
+.price-tags{
+display:flex;
+gap:10px;
+margin:10px 0;
+}
+/* buttons */
+.hero-buttons{
+display:flex;
+gap:16px;
+margin-top:20px;
+}
+/* trusted brands */
+.trusted-brands{
+margin-top:80px;
+text-align:center;
+}
+.brand-logos{
+display:flex;
+justify-content:center;
+gap:40px;
+margin-top:20px;
+flex-wrap:wrap;
+}
+
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 1599px) {}
+
+@media (max-width: 1439px) {}
+
+@media (max-width: 1199px) {}
+
+@media (max-width: 1079px) {}
+
+@media (max-width: 799px) {
+
+    :root {
+        --font-size-hero-h1: 40px;
+        --section-padding: 60px 0;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: var(--font-size-body-medium);
+    }
+
+}
+
+@media (max-width: 359px) {
+
+    :root {
+        --font-size-hero-h1: 32px;
+        --section-padding: 40px 0;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 12px 16px;
+    }
+
+}
