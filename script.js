@@ -1,3 +1,34 @@
+// Header Scroll Script
+
+let lastScroll = 0;
+const header = document.querySelector(".header");
+const threshold = window.innerHeight * 0.8;
+const scrollDelta = 10; // ignore small scrolls
+
+window.addEventListener("scroll", () => {
+  const currentScroll = window.scrollY;
+
+  // Shadow
+  if (currentScroll > threshold) {
+    header.classList.add("scrolled");
+  } else {
+    header.classList.remove("scrolled");
+  }
+
+  // Ignore tiny scroll
+  if (Math.abs(currentScroll - lastScroll) < scrollDelta) return;
+
+  if (currentScroll > lastScroll && currentScroll > 100) {
+    header.classList.add("hide"); // down
+  } else {
+    header.classList.remove("hide"); // up
+  }
+
+  lastScroll = currentScroll;
+});
+
+// Carousal and Zoom Script
+
 const mainImage = document.getElementById("mainImage");
 const thumbs = document.querySelectorAll(".thumb");
 
@@ -156,4 +187,14 @@ faqItems.forEach((item) => {
 
   });
 
+});
+
+
+// Loader
+window.addEventListener("load", () => {
+  const loader = document.getElementById("loader");
+
+  setTimeout(() => {
+    loader.classList.add("hide");
+  }, 300);
 });

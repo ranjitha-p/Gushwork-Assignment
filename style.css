@@ -18,6 +18,9 @@
     --color-tag-text-yellow: #92400E;
     --color-border-gray-light: #E1E3E8;
     --color-white: #FFFFFF;
+    --color-black: #0D0D0D;
+    --color-border: #CFD1D4;
+    --color-bg-light: #f9fafb;
 
     /* Font Sizes */
     --font-size-hero-h1: 56px;
@@ -114,7 +117,7 @@ p {
 }
 
 .bg-texture {
-    background-image:url("../assets/images/Noise_Texture_bg.png");
+    background-image:url("assets/images/Noise_Texture_bg.png");
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
@@ -178,21 +181,96 @@ p {
     color: var(--color-tag-text-yellow);
 }
 
+
+
+/* =========================
+   Loader
+========================= */
+
+#loader {
+  position: fixed;
+  inset: 0;
+
+  background: linear-gradient(180deg, #ffffff, #f9fafb);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 9999;
+
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+#loader.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Ring loader */
+.loader-ring {
+  width: 44px;
+  height: 44px;
+
+  border-radius: 50%;
+  border: 3px solid rgba(43, 57, 144, 0.15); /* light primary */
+  border-top: 3px solid var(--color-primary);
+
+  animation: spin 0.8s linear infinite;
+}
+
+/* subtle text */
+.loader-text {
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--color-body-light);
+  text-transform: uppercase;
+}
+
+/* animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
 /* Styles for width 1600 and above */
 /* =========================
    Header
 ========================= */
 
 .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+   position: fixed;
+  top: 0; /* visible initially */
+  left: 0;
+  width: 100%;
+  transition: top 0.3s ease;
     z-index: 1000;
+
+
+  transform: translateY(0);
+  /* transition: transform 0.35s ease, box-shadow 0.3s ease; */
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  will-change: transform;
+
     background-color: var(--color-white);
     border-bottom: 1px solid var(--color-border-gray-light);
 }
+.header.hide {
+  transform: translateY(-100%);
+}
 
+.header.scrolled {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
 .navbar {
     display: flex;
     align-items: center;
@@ -496,7 +574,7 @@ border:2px solid var(--color-primary);
     align-items: center;
     gap: 6px;
     font-size: var(--font-size-body-large);
-    color: #0D0D0D;
+    color: var(--color-black);
 }
 
 /* price card */
@@ -516,7 +594,7 @@ border:2px solid var(--color-primary);
 
 .text-price {
     font-size: var(--font-size-price);
-    color: #0D0D0D;
+    color: var(--color-black);
     font-weight: 600;
 }
 
@@ -530,7 +608,7 @@ border:2px solid var(--color-primary);
     width: fit-content;
     padding: 6px 12px;
     font-size: var(--font-size-body-medium);
-    color: #0D0D0D;
+    color: var(--color-black);
     border-radius: 6px;
     background: var(--color-border-gray);
 }
@@ -671,7 +749,7 @@ border:2px solid var(--color-primary);
 /* Header */
 .features-header {
     max-width: 800px;
-    color: #0D0D0D;
+    color: var(--color-black);
 }
 
 .features-header h3 {
@@ -712,7 +790,7 @@ border:2px solid var(--color-primary);
 /* Title */
 .feature-card h3 {
     font-size: var(--font-size-price);
-    color: #0D0D0D;
+    color: var(--color-black);
 }
 
 /* Text */
