@@ -46,23 +46,25 @@ let currentIndex = 0;
 --------------------------- */
 
 function updateImage() {
-
   const newSrc = thumbs[currentIndex].querySelector("img").src;
 
-  mainImage.src = newSrc;
+  mainImage.style.opacity = 0;
+
+  setTimeout(() => {
+    mainImage.src = newSrc;
+    mainImage.style.opacity = 1;
+  }, 150);
 
   zoomPreview.style.backgroundImage = `url(${newSrc})`;
 
   document.querySelector(".thumb.active")?.classList.remove("active");
-
   thumbs[currentIndex].classList.add("active");
 
   thumbs[currentIndex].scrollIntoView({
-    behavior:"smooth",
-    inline:"center",
-    block:"nearest"
- });
-
+    behavior: "smooth",
+    inline: "center",
+    block: "nearest"
+  });
 }
 
 
@@ -134,7 +136,7 @@ heroImage.addEventListener("mousemove", (e) => {
   /* Show preview */
   zoomPreview.style.display = "block";
 
-  zoomPreview.style.backgroundImage = `url(${mainImage.src})`;
+  // zoomPreview.style.backgroundImage = `url(${mainImage.src})`;
 
   zoomPreview.style.backgroundPosition = `${xPercent}% ${yPercent}%`;
 
@@ -144,10 +146,17 @@ heroImage.addEventListener("mousemove", (e) => {
   zoomLens.style.display = "flex";
 
   const lensWidth = zoomLens.offsetWidth / 2;
-  const lensHeight = zoomLens.offsetHeight / 2;
+const lensHeight = zoomLens.offsetHeight / 2;
 
-  zoomLens.style.left = `${x - lensWidth}px`;
-  zoomLens.style.top = `${y - lensHeight}px`;
+let lensX = x - lensWidth;
+let lensY = y - lensHeight;
+
+// clamp inside image
+lensX = Math.max(0, Math.min(lensX, rect.width - zoomLens.offsetWidth));
+lensY = Math.max(0, Math.min(lensY, rect.height - zoomLens.offsetHeight));
+
+zoomLens.style.left = `${lensX}px`;
+zoomLens.style.top = `${lensY}px`;
 
 });
 
@@ -170,23 +179,22 @@ heroImage.addEventListener("mouseleave", () => {
 const faqItems = document.querySelectorAll(".faq-item");
 
 faqItems.forEach((item) => {
-
   const question = item.querySelector(".faq-question");
+  const answer = item.querySelector(".faq-answer");
 
   question.addEventListener("click", () => {
-
     const isActive = item.classList.contains("active");
 
-    /* close all */
-    faqItems.forEach((faq) => faq.classList.remove("active"));
+    faqItems.forEach((faq) => {
+      faq.classList.remove("active");
+      faq.querySelector(".faq-answer").style.maxHeight = null;
+    });
 
-    /* reopen clicked one */
-    if(!isActive){
+    if (!isActive) {
       item.classList.add("active");
+      answer.style.maxHeight = answer.scrollHeight + "px";
     }
-
   });
-
 });
 
 
@@ -198,3 +206,43 @@ window.addEventListener("load", () => {
     loader.classList.add("hide");
   }, 300);
 });
+
+
+// application slider
+
+const slider = document.querySelector('.applications-slider');
+const prevBtn = document.querySelector('.app-prev');
+const nextBtn = document.querySelector('.app-next');
+
+const card = document.querySelector('.application-card');
+const gap = 24;
+const scrollAmount = card.offsetWidth + gap;
+
+/* NEXT */
+nextBtn.addEventListener('click', () => {
+  slider.scrollBy({
+    left: scrollAmount,
+    behavior: 'smooth'
+  });
+});
+
+/* PREV */
+prevBtn.addEventListener('click', () => {
+  slider.scrollBy({
+    left: -scrollAmount,
+    behavior: 'smooth'
+  });
+});
+
+/* BUTTON STATE */
+function updateButtons() {
+  const maxScrollLeft = slider.scrollWidth - slider.clientWidth;
+
+  prevBtn.disabled = slider.scrollLeft <= 0;
+  nextBtn.disabled = slider.scrollLeft >= maxScrollLeft - 1;
+}
+
+/* EVENTS */
+slider.addEventListener('scroll', updateButtons);
+window.addEventListener('load', updateButtons);
+window.addEventListener('resize', updateButtons);

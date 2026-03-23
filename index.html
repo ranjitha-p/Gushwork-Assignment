@@ -79,7 +79,7 @@
             <div class="main-image">
 
               <div class="hero-image">
-                <img id="mainImage" src="assets/images/hero-slider.jpg" alt="HDPE Pipes">
+                <img id="mainImage" src="assets/images/product.jpg" alt="HDPE Pipes">
 
                 <div class="zoom-lens">
       <img src="assets/icons/zoom-lens.png" alt="">
@@ -484,7 +484,11 @@
 
             <button class="faq-question">
               What is the purpose of a laser cutter for sheet metal?
-              <img class="faq-icon" src="assets/icons/faq-icon.png" alt="FAQ Icon">
+              <span class="faq-icon-wrapper">
+                <svg class="faq-icon" viewBox="0 0 24 24">
+                  <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+              </span>
             </button>
 
             <div class="faq-answer">
@@ -499,7 +503,11 @@
           <div class="faq-item">
             <button class="faq-question">
               What are the benefits of using aluminum tubing in manufacturing?
-               <img class="faq-icon" src="assets/icons/faq-icon.png" alt="FAQ Icon">
+               <span class="faq-icon-wrapper">
+                <svg class="faq-icon" viewBox="0 0 24 24">
+                  <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+              </span>
             </button>
             <div class="faq-answer">
               Aluminum tubing provides durability, corrosion resistance and
@@ -511,7 +519,11 @@
           <div class="faq-item">
             <button class="faq-question">
               How is aluminum tubing produced?
-               <img class="faq-icon" src="assets/icons/faq-icon.png" alt="FAQ Icon">
+               <span class="faq-icon-wrapper">
+                <svg class="faq-icon" viewBox="0 0 24 24">
+                  <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+              </span>
             </button>
             <div class="faq-answer">
               Aluminum tubing is produced through extrusion and forming processes
@@ -523,7 +535,11 @@
           <div class="faq-item">
             <button class="faq-question">
               What are the common applications of aluminum tubing?
-               <img class="faq-icon" src="assets/icons/faq-icon.png" alt="FAQ Icon">
+               <span class="faq-icon-wrapper">
+                <svg class="faq-icon" viewBox="0 0 24 24">
+                  <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+              </span>
             </button>
             <div class="faq-answer">
               It is commonly used in construction, automotive, infrastructure
@@ -535,7 +551,11 @@
           <div class="faq-item">
             <button class="faq-question">
               Can aluminum tubing be customized?
-               <img class="faq-icon" src="assets/icons/faq-icon.png" alt="FAQ Icon">
+               <span class="faq-icon-wrapper">
+                <svg class="faq-icon" viewBox="0 0 24 24">
+                  <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+              </span>
             </button>
             <div class="faq-answer">
               Yes, aluminum tubing can be customized to different diameters,
@@ -576,11 +596,11 @@
 
     </section>
 
-    <section class="section applications">
+    <section class="section applications bg-texture">
 
       <div class="container">
 
-        <!-- Header -->
+  <!-- HEADER inside container -->
         <div class="applications-header">
 
           <div class="applications-title">
@@ -597,24 +617,25 @@
           <div class="applications-nav">
 
             <button class="app-prev">
-              ←
+              <img src="assets/icons/arrow-left.png" alt="Previous">
             </button>
 
             <button class="app-next">
-              →
+              <img src="assets/icons/arrow-right.png" alt="Next">
             </button>
 
           </div>
 
         </div>
+      </div>
 
 
-        <!-- Slider -->
+        <!-- FULL WIDTH SLIDER -->
         <div class="applications-slider">
 
           <div class="application-card">
 
-            <img src="assets/images/app1.jpg" alt="">
+            <img src="assets/images/img.png" alt="">
 
             <div class="card-overlay">
 
@@ -633,7 +654,7 @@
 
           <div class="application-card">
 
-            <img src="assets/images/app2.jpg" alt="">
+            <img src="assets/images/img.png" alt="">
 
             <div class="card-overlay">
 
@@ -652,7 +673,7 @@
 
           <div class="application-card">
 
-            <img src="assets/images/app3.jpg" alt="">
+            <img src="assets/images/img.png" alt="">
 
             <div class="card-overlay">
 
@@ -671,7 +692,43 @@
 
           <div class="application-card">
 
-            <img src="assets/images/app4.jpg" alt="">
+            <img src="assets/images/img.png" alt="">
+
+            <div class="card-overlay">
+
+              <h3>Fishnet Manufacturing</h3>
+
+              <p>
+                High-performance twisting solutions for packaging yarn,
+                strapping materials, and reinforcement threads used in
+                modern packaging applications.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="application-card">
+
+            <img src="assets/images/img.png" alt="">
+
+            <div class="card-overlay">
+
+              <h3>Fishnet Manufacturing</h3>
+
+              <p>
+                High-performance twisting solutions for packaging yarn,
+                strapping materials, and reinforcement threads used in
+                modern packaging applications.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="application-card">
+
+            <img src="assets/images/img.png" alt="">
 
             <div class="card-overlay">
 
@@ -689,11 +746,10 @@
 
         </div>
 
-      </div>
 
     </section>
 
-    <section class="section process">
+    <section class="section process bg-texture">
 
       <div class="container">
 
@@ -710,55 +766,60 @@
         </div>
 
 
-        <!-- Process Tabs -->
-        <div class="process-tabs">
+    <div class="process-content">
 
-          <button class="process-tab active">Raw Material</button>
-          <button class="process-tab">Extrusion</button>
-          <button class="process-tab">Cooling</button>
-          <button class="process-tab">Sizing</button>
-          <button class="process-tab">Quality Control</button>
-          <button class="process-tab">Marking</button>
-          <button class="process-tab">Cutting</button>
-          <button class="process-tab">Packaging</button>
+  <!-- Tabs -->
+  <div class="process-tabs">
+    <button class="process-tab active">Raw Material</button>
+    <button class="process-tab">Extrusion</button>
+    <button class="process-tab">Cooling</button>
+    <button class="process-tab">Sizing</button>
+    <button class="process-tab">Quality Control</button>
+    <button class="process-tab">Marking</button>
+    <button class="process-tab">Cutting</button>
+    <button class="process-tab">Packaging</button>
+  </div>
 
-        </div>
+  <!-- Content row -->
+  <div class="process-body">
 
+    <!-- LEFT -->
+    <div class="process-text">
+      <h3>High-Grade Raw Material Selection</h3>
 
-        <!-- Process Content -->
-        <div class="process-content">
+      <p>
+        Vacuum sizing tanks ensure precise outer diameter while internal
+        pressure maintains perfect roundness and wall thickness uniformity.
+      </p>
 
-          <!-- LEFT -->
-          <div class="process-text">
+      <ul class="process-features">
+        <li>
+          <img src="assets/icons/check.png" class="feature-icon" alt="">
+          <span>PE100 grade material</span>
+        </li>
+        <li>
+          <img src="assets/icons/check.png" class="feature-icon" alt="">
+          <span>Optimal molecular weight distribution</span>
+        </li>
+      </ul>
+    </div>
 
-            <h3>High-Grade Raw Material Selection</h3>
+    <!-- RIGHT -->
+    <div class="process-image">
+      <img src="assets/images/product.jpg" alt="Manufacturing Process">
 
-            <p>
-              Vacuum sizing tanks ensure precise outer diameter while internal
-              pressure maintains perfect roundness and wall thickness uniformity.
-            </p>
+      <button class="process-prev">
+        <img src="assets/icons/left-arrow.png" alt="">
+      </button>
 
-            <ul class="process-features">
+      <button class="process-next">
+        <img src="assets/icons/right-arrow.png" alt="">
+      </button>
+    </div>
 
-              <li>PE100 grade material</li>
-              <li>Optimal molecular weight distribution</li>
+  </div>
 
-            </ul>
-
-          </div>
-
-
-          <!-- RIGHT -->
-          <div class="process-image">
-
-            <img src="assets/images/process.jpg" alt="Manufacturing Process">
-
-            <button class="process-prev">←</button>
-            <button class="process-next">→</button>
-
-          </div>
-
-        </div>
+</div>
 
       </div>
 
