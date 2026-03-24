@@ -47,6 +47,7 @@ let currentIndex = 0;
 
 function updateImage() {
   const newSrc = thumbs[currentIndex].querySelector("img").src;
+  zoomPreview.style.backgroundImage = `url(${mainImage.src})`;
 
   mainImage.style.opacity = 0;
 
@@ -135,6 +136,7 @@ heroImage.addEventListener("mousemove", (e) => {
 
   /* Show preview */
   zoomPreview.style.display = "block";
+  zoomPreview.style.opacity = "1"; 
 
   // zoomPreview.style.backgroundImage = `url(${mainImage.src})`;
 
@@ -168,11 +170,103 @@ zoomLens.style.top = `${lensY}px`;
 heroImage.addEventListener("mouseleave", () => {
 
   zoomPreview.style.display = "none";
+  zoomPreview.style.opacity = "0";
   zoomLens.style.display = "none";
 
 });
 
 
+// Section 2 modal
+
+const openBtn = document.getElementById("openModal");
+const modal = document.getElementById("modal");
+const closeBtn = document.getElementById("closeModal");
+
+const emailInput = document.querySelector('.modal-form input[type="email"]');
+const downloadBtn = document.getElementById("downloadBtn");
+
+// Email regex (simple & enough)
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+emailInput.addEventListener("input", () => {
+  const value = emailInput.value.trim();
+
+  if (emailPattern.test(value)) {
+    // Enable
+    downloadBtn.disabled = false;
+    downloadBtn.classList.add("active");
+  } else {
+    // Disable
+    downloadBtn.disabled = true;
+    downloadBtn.classList.remove("active");
+  }
+});
+
+openBtn.addEventListener("click", () => {
+  modal.classList.add("active");
+  document.body.style.overflow = "hidden";
+});
+
+closeBtn.addEventListener("click", closeModal);
+
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) closeModal();
+});
+
+function closeModal() {
+  modal.classList.remove("active");
+  document.body.style.overflow = "auto";
+}
+
+
+// Section 3 - quote modal
+const quoteModal = document.getElementById("quoteModal");
+const openQuoteBtn = document.getElementById("openQuoteModal");
+const closeQuoteBtn = document.getElementById("closeQuoteModal");
+
+const quotePhoneInput = document.querySelector(".quote-phone-input");
+const quoteDropdown = document.getElementById("quotePhoneDropdown");
+const quoteList = document.getElementById("quotePhoneList");
+const quoteCodeEl = quoteDropdown.querySelector(".code");
+
+// Toggle dropdown
+quoteDropdown.addEventListener("click", () => {
+  quotePhoneInput.classList.toggle("open");
+});
+
+// Select code
+quoteList.querySelectorAll("li").forEach(item => {
+  item.addEventListener("click", () => {
+    const code = item.getAttribute("data-code");
+    quoteCodeEl.textContent = code;
+
+    quotePhoneInput.classList.remove("open");
+  });
+});
+
+// Close on outside click
+document.addEventListener("click", (e) => {
+  if (!quotePhoneInput.contains(e.target)) {
+    quotePhoneInput.classList.remove("open");
+  }
+});
+
+// Open
+openQuoteBtn.addEventListener("click", () => {
+  quoteModal.classList.add("active");
+});
+
+// Close (X)
+closeQuoteBtn.addEventListener("click", () => {
+  quoteModal.classList.remove("active");
+});
+
+// Close on outside click
+quoteModal.addEventListener("click", (e) => {
+  if (e.target === quoteModal) {
+    quoteModal.classList.remove("active");
+  }
+});
 
 // Faq section
 
@@ -280,7 +374,7 @@ const processData = [
       "Uniform wall thickness",
       "High-speed extrusion control"
     ],
-    image: "assets/images/product.jpg"
+    image: "assets/images/portfolio-1.jpg"
   },
   {
     tab: "Cooling",
@@ -290,7 +384,7 @@ const processData = [
       "Rapid cooling",
       "Structural stability"
     ],
-    image: "assets/images/product.jpg"
+    image: "assets/images/portfolio-2.jpg"
   },
   {
     tab: "Sizing",
@@ -310,7 +404,7 @@ const processData = [
       "Continuous inspection",
       "Certified quality"
     ],
-    image: "assets/images/product.jpg"
+    image: "assets/images/portfolio-1.jpg"
   },
   {
     tab: "Marking",
@@ -320,7 +414,7 @@ const processData = [
       "Durable marking",
       "Easy identification"
     ],
-    image: "assets/images/product.jpg"
+    image: "assets/images/portfolio-2.jpg"
   },
   {
     tab: "Cutting",
@@ -340,7 +434,7 @@ const processData = [
       "Damage protection",
       "Efficient handling"
     ],
-    image: "assets/images/product.jpg"
+    image: "assets/images/portfolio-1.jpg"
   }
 ];
 
@@ -410,3 +504,34 @@ processNextBtn.addEventListener("click", () => {
 
 /* ---------- INIT ---------- */
 updateProcess(0);
+
+
+
+// Phone dropdown
+const dropdown = document.getElementById("phoneDropdown");
+const phoneInput = document.querySelector(".phone-input");
+const list = document.getElementById("phoneList");
+
+const codeEl = dropdown.querySelector(".code");
+
+// Toggle dropdown
+dropdown.addEventListener("click", () => {
+  phoneInput.classList.toggle("open");
+});
+
+// Select code
+list.querySelectorAll("li").forEach(item => {
+  item.addEventListener("click", () => {
+    const code = item.getAttribute("data-code");
+    codeEl.textContent = code;
+
+    phoneInput.classList.remove("open");
+  });
+});
+
+// Close on outside click
+document.addEventListener("click", (e) => {
+  if (!phoneInput.contains(e.target)) {
+    phoneInput.classList.remove("open");
+  }
+});
