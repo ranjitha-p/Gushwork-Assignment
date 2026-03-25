@@ -1,9 +1,8 @@
 // Header Scroll Script
-
 let lastScroll = 0;
 const header = document.querySelector(".header");
 const threshold = window.innerHeight * 0.8;
-const scrollDelta = 10; // ignore small scrolls
+const scrollDelta = 10; 
 
 window.addEventListener("scroll", () => {
   const currentScroll = window.scrollY;
@@ -27,8 +26,8 @@ window.addEventListener("scroll", () => {
   lastScroll = currentScroll;
 });
 
-// Carousal and Zoom Script
 
+// Carousal and Zoom Script
 const mainImage = document.getElementById("mainImage");
 const thumbs = document.querySelectorAll(".thumb");
 
@@ -41,13 +40,15 @@ const zoomLens = document.querySelector(".zoom-lens");
 
 let currentIndex = 0;
 
+/* initial zoompreview  setup */
+zoomPreview.style.backgroundImage = `url(${mainImage.src})`;
+
 /* ---------------------------
    UPDATE MAIN IMAGE
 --------------------------- */
 
 function updateImage() {
   const newSrc = thumbs[currentIndex].querySelector("img").src;
-  zoomPreview.style.backgroundImage = `url(${mainImage.src})`;
 
   mainImage.style.opacity = 0;
 
@@ -63,7 +64,7 @@ function updateImage() {
 
   thumbs[currentIndex].scrollIntoView({
     behavior: "smooth",
-    inline: "center",
+    inline: "nearest",
     block: "nearest"
   });
 }
@@ -121,8 +122,10 @@ leftArrow.addEventListener("click", () => {
 
 
 /* ---------------------------
-   ZOOM EFFECT
+   ZOOM EFFECT (ONLY DESKTOP)
 --------------------------- */
+
+if (window.innerWidth > 800) {
 
 heroImage.addEventListener("mousemove", (e) => {
 
@@ -135,7 +138,6 @@ heroImage.addEventListener("mousemove", (e) => {
   const yPercent = (y / rect.height) * 100;
 
   /* Show preview */
-  zoomPreview.style.display = "block";
   zoomPreview.style.opacity = "1"; 
 
   // zoomPreview.style.backgroundImage = `url(${mainImage.src})`;
@@ -169,11 +171,12 @@ zoomLens.style.top = `${lensY}px`;
 
 heroImage.addEventListener("mouseleave", () => {
 
-  zoomPreview.style.display = "none";
   zoomPreview.style.opacity = "0";
   zoomLens.style.display = "none";
 
 });
+
+};
 
 
 // Section 2 modal
@@ -204,7 +207,6 @@ emailInput.addEventListener("input", () => {
 
 openBtn.addEventListener("click", () => {
   modal.classList.add("active");
-  document.body.style.overflow = "hidden";
 });
 
 closeBtn.addEventListener("click", closeModal);
@@ -215,8 +217,24 @@ modal.addEventListener("click", (e) => {
 
 function closeModal() {
   modal.classList.remove("active");
-  document.body.style.overflow = "auto";
 }
+
+const specForm = document.getElementById("specForm");
+
+specForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  if (!specForm.checkValidity()) {
+    specForm.reportValidity(); // shows browser errors
+    return;
+  }
+
+  // ✅ success case
+  alert("Form submitted successfully");
+
+  specForm.reset();
+  modal.classList.remove("active");
+});
 
 
 // Section 3 - quote modal
@@ -267,6 +285,24 @@ quoteModal.addEventListener("click", (e) => {
     quoteModal.classList.remove("active");
   }
 });
+
+const quoteForm = document.getElementById("quoteForm");
+
+quoteForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  if (!quoteForm.checkValidity()) {
+    quoteForm.reportValidity(); // shows browser errors
+    return;
+  }
+
+  // ✅ success case
+  alert("Form submitted successfully");
+
+  quoteForm.reset();
+  quoteModal.classList.remove("active");
+});
+
 
 // Faq section
 
@@ -353,6 +389,15 @@ const image = document.querySelector(".process-image img");
 
 const processPrevBtn = document.querySelector(".process-prev");
 const processNextBtn = document.querySelector(".process-next");
+
+const mobileTitle = document.querySelector(".mobile-title");
+const mobileDesc = document.querySelector(".mobile-desc");
+const mobileFeatures = document.querySelector(".mobile-features");
+const mobileImg = document.querySelector(".mobile-img");
+const stepLabel = document.querySelector(".process-step-label");
+
+const mobilePrev = document.querySelector(".mobile-prev");
+const mobileNext = document.querySelector(".mobile-next");
 
 /* ---------- DATA ---------- */
 const processData = [
@@ -471,6 +516,27 @@ function updateProcess(index) {
   // Disable buttons
   prevBtn.disabled = index === 0;
   nextBtn.disabled = index === processData.length - 1;
+
+
+  // for Mobile
+  if (mobileTitle) {
+  mobileTitle.textContent = data.title;
+  mobileDesc.textContent = data.desc;
+  mobileImg.src = data.image;
+
+  mobileFeatures.innerHTML = "";
+  data.features.forEach(feature => {
+    mobileFeatures.innerHTML += `
+      <li>
+        <img src="assets/icons/check.png" class="feature-icon" alt="">
+        <span>${feature}</span>
+      </li>
+    `;
+  });
+
+  stepLabel.textContent = `Step ${index + 1}/${processData.length}: ${data.tab}`;
+}
+
 }
 
 /* ---------- TAB CLICK ---------- */
@@ -502,12 +568,70 @@ processNextBtn.addEventListener("click", () => {
   }
 });
 
+// for mobile 
+if (mobilePrev && mobileNext) {
+
+  mobilePrev.addEventListener("click", () => {
+    if (processCurrentIndex > 0) {
+      processCurrentIndex--;
+      updateProcess(processCurrentIndex);
+    }
+  });
+
+  mobileNext.addEventListener("click", () => {
+    if (processCurrentIndex < processData.length - 1) {
+      processCurrentIndex++;
+      updateProcess(processCurrentIndex);
+    }
+  });
+
+}
+
+// swipe functionality for mobile
+let touchStartX = 0;
+let touchEndX = 0;
+
+const mobileCard = document.querySelector(".process-mobile-card");
+
+if (mobileCard) {
+
+  mobileCard.addEventListener("touchstart", (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  mobileCard.addEventListener("touchend", (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  });
+
+}
+
+function handleSwipe() {
+  const threshold = 50; // minimum swipe distance
+
+  if (touchEndX < touchStartX - threshold) {
+    // swipe left → next
+    if (processCurrentIndex < processData.length - 1) {
+      processCurrentIndex++;
+      updateProcess(processCurrentIndex);
+    }
+  }
+
+  if (touchEndX > touchStartX + threshold) {
+    // swipe right → prev
+    if (processCurrentIndex > 0) {
+      processCurrentIndex--;
+      updateProcess(processCurrentIndex);
+    }
+  }
+}
+
 /* ---------- INIT ---------- */
 updateProcess(0);
 
 
 
-// Phone dropdown
+// Phone input dropdown
 const dropdown = document.getElementById("phoneDropdown");
 const phoneInput = document.querySelector(".phone-input");
 const list = document.getElementById("phoneList");
