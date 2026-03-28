@@ -1,7 +1,6 @@
 // Header Scroll Script
 let lastScroll = 0;
 const header = document.querySelector(".header");
-if (!header) return;
 
 const threshold = window.innerHeight * 0.8;
 const scrollDelta = 10;
