@@ -1,8 +1,10 @@
 // Header Scroll Script
 let lastScroll = 0;
 const header = document.querySelector(".header");
+if (!header) return;
+
 const threshold = window.innerHeight * 0.8;
-const scrollDelta = 10; 
+const scrollDelta = 10;
 
 window.addEventListener("scroll", () => {
   const currentScroll = window.scrollY;
@@ -135,54 +137,54 @@ leftArrow.addEventListener("click", () => {
 
 if (window.innerWidth > 800) {
 
-heroImage.addEventListener("mousemove", (e) => {
+  heroImage.addEventListener("mousemove", (e) => {
 
-  const rect = heroImage.getBoundingClientRect();
+    const rect = heroImage.getBoundingClientRect();
 
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
 
-  const xPercent = (x / rect.width) * 100;
-  const yPercent = (y / rect.height) * 100;
+    const xPercent = (x / rect.width) * 100;
+    const yPercent = (y / rect.height) * 100;
 
-  /* Show preview */
-  zoomPreview.style.opacity = "1"; 
+    /* Show preview */
+    zoomPreview.style.opacity = "1";
 
-  // zoomPreview.style.backgroundImage = `url(${mainImage.src})`;
+    // zoomPreview.style.backgroundImage = `url(${mainImage.src})`;
 
-  zoomPreview.style.backgroundPosition = `${xPercent}% ${yPercent}%`;
-
-
-  /* Move lens */
-
-  zoomLens.style.display = "flex";
-
-  const lensWidth = zoomLens.offsetWidth / 2;
-const lensHeight = zoomLens.offsetHeight / 2;
-
-let lensX = x - lensWidth;
-let lensY = y - lensHeight;
-
-// clamp inside image
-lensX = Math.max(0, Math.min(lensX, rect.width - zoomLens.offsetWidth));
-lensY = Math.max(0, Math.min(lensY, rect.height - zoomLens.offsetHeight));
-
-zoomLens.style.left = `${lensX}px`;
-zoomLens.style.top = `${lensY}px`;
-
-});
+    zoomPreview.style.backgroundPosition = `${xPercent}% ${yPercent}%`;
 
 
-/* ---------------------------
-   HIDE ZOOM WHEN LEAVE
---------------------------- */
+    /* Move lens */
 
-heroImage.addEventListener("mouseleave", () => {
+    zoomLens.style.display = "flex";
 
-  zoomPreview.style.opacity = "0";
-  zoomLens.style.display = "none";
+    const lensWidth = zoomLens.offsetWidth / 2;
+    const lensHeight = zoomLens.offsetHeight / 2;
 
-});
+    let lensX = x - lensWidth;
+    let lensY = y - lensHeight;
+
+    // clamp inside image
+    lensX = Math.max(0, Math.min(lensX, rect.width - zoomLens.offsetWidth));
+    lensY = Math.max(0, Math.min(lensY, rect.height - zoomLens.offsetHeight));
+
+    zoomLens.style.left = `${lensX}px`;
+    zoomLens.style.top = `${lensY}px`;
+
+  });
+
+
+  /* ---------------------------
+     HIDE ZOOM WHEN LEAVE
+  --------------------------- */
+
+  heroImage.addEventListener("mouseleave", () => {
+
+    zoomPreview.style.opacity = "0";
+    zoomLens.style.display = "none";
+
+  });
 
 };
 
@@ -528,22 +530,22 @@ function updateProcess(index) {
 
   // for Mobile
   if (mobileTitle) {
-  mobileTitle.textContent = data.title;
-  mobileDesc.textContent = data.desc;
-  mobileImg.src = data.image;
+    mobileTitle.textContent = data.title;
+    mobileDesc.textContent = data.desc;
+    mobileImg.src = data.image;
 
-  mobileFeatures.innerHTML = "";
-  data.features.forEach(feature => {
-    mobileFeatures.innerHTML += `
+    mobileFeatures.innerHTML = "";
+    data.features.forEach(feature => {
+      mobileFeatures.innerHTML += `
       <li>
         <img src="assets/icons/check.png" class="feature-icon" alt="">
         <span>${feature}</span>
       </li>
     `;
-  });
+    });
 
-  stepLabel.textContent = `Step ${index + 1}/${processData.length}: ${data.tab}`;
-}
+    stepLabel.textContent = `Step ${index + 1}/${processData.length}: ${data.tab}`;
+  }
 
 }
 
